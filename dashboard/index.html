@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard — Eleanore Colton</title>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="dashboard.css">
+</head>
+<body>
+
+  <!-- PASSWORD SCREEN -->
+  <div id="lock-screen">
+    <div class="lock-card">
+      <div class="lock-logo">EC</div>
+      <h1>Career Dashboard</h1>
+      <p class="lock-desc">Private. Enter your password to continue.</p>
+      <input
+        type="password"
+        id="password-input"
+        placeholder="Password"
+        onkeydown="handleKey(event)"
+      />
+      <button onclick="checkPassword()">Enter</button>
+      <p class="lock-error" id="lock-error"></p>
+    </div>
+  </div>
+
+  <!-- DASHBOARD — hidden until password correct -->
+  <div id="dashboard" class="hidden">
+
+    <!-- NAV -->
+    <nav class="dash-nav">
+      <span class="dash-nav-logo">EC — Career Dashboard</span>
+      <div class="dash-nav-links">
+        <a href="#overview">Overview</a>
+        <a href="#credentials">Credentials</a>
+        <a href="#applications">Applications</a>
+        <a href="#contacts">Contacts</a>
+        <a href="#tasks">This week</a>
+      </div>
+      <button class="dash-logout" onclick="logout()">Lock</button>
+    </nav>
+
+    <!-- OVERVIEW -->
+    <section id="overview" class="dash-section">
+      <p class="dash-label">Career command center</p>
+      <h2>Good to see you, Eleanore.</h2>
+      <div class="metrics-grid" id="metrics-grid"></div>
+    </section>
+
+    <!-- CREDENTIALS -->
+    <section id="credentials" class="dash-section alt">
+      <p class="dash-label">Professional development</p>
+      <h2>Credentials & continuing education</h2>
+      <div class="cred-controls">
+        <input type="text" id="cred-name" placeholder="Credential or course name" />
+        <select id="cred-status">
+          <option value="in-progress">In progress</option>
+          <option value="planned">Planned</option>
+          <option value="complete">Complete</option>
+        </select>
+        <input type="text" id="cred-org" placeholder="Issuing organization" />
+        <input type="date" id="cred-date" />
+        <button onclick="addCredential()">+ Add</button>
+      </div>
+      <div id="cred-list"></div>
+    </section>
+
+    <!-- APPLICATIONS -->
+    <section id="applications" class="dash-section">
+      <p class="dash-label">Job search</p>
+      <h2>Applications</h2>
+      <div class="cred-controls">
+        <input type="text" id="app-company" placeholder="Company" />
+        <input type="text" id="app-role" placeholder="Role title" />
+        <select id="app-status">
+          <option value="applied">Applied</option>
+          <option value="in-contact">In contact</option>
+          <option value="interviewing">Interviewing</option>
+          <option value="no-response">No response</option>
+        </select>
+        <input type="date" id="app-date" />
+        <input type="text" id="app-next" placeholder="Next action" />
+        <button onclick="addApplication()">+ Add</button>
+      </div>
+      <div id="app-list"></div>
+    </section>
+
+    <!-- CONTACTS -->
+    <section id="contacts" class="dash-section alt">
+      <p class="dash-label">Network</p>
+      <h2>Industry contacts</h2>
+      <div class="cred-controls">
+        <input type="text" id="con-name" placeholder="Name" />
+        <input type="text" id="con-company" placeholder="Company" />
+        <select id="con-status">
+          <option value="warm">Warm</option>
+          <option value="active">Active</option>
+          <option value="stale">Follow up</option>
+          <option value="target">Target</option>
+        </select>
+        <input type="text" id="con-next" placeholder="Next action" />
+        <button onclick="addContact()">+ Add</button>
+      </div>
+      <div id="con-list"></div>
+    </section>
+
+    <!-- TASKS -->
+    <section id="tasks" class="dash-section">
+      <p class="dash-label">Weekly rhythm</p>
+      <h2>This week</h2>
+      <div class="task-controls">
+        <input type="text" id="task-input" placeholder="Add a task..." onkeydown="handleTaskKey(event)" />
+        <button onclick="addTask()">+ Add</button>
+      </div>
+      <div id="task-list"></div>
+      <button class="clear-btn" onclick="clearCompletedTasks()">Clear completed</button>
+    </section>
+
+  </div>
+
+  <script src="dashboard.js"></script>
+</body>
+</html>
