@@ -37,6 +37,7 @@
         <a href="#credentials">Credentials</a>
         <a href="#applications">Applications</a>
         <a href="#contacts">Contacts</a>
+        <a href="#tools">Tools</a>
         <a href="#tasks">This week</a>
       </div>
       <button class="dash-logout" onclick="logout()">Lock</button>
@@ -105,7 +106,90 @@
       </div>
       <div id="con-list"></div>
     </section>
+<!-- APPLICATION TOOLS -->
+<section id="tools" class="dash-section alt">
+  <p class="dash-label">Application tools</p>
+  <h2>Career document studio</h2>
 
+  <!-- TAB NAV -->
+  <div class="tools-tabs">
+    <button class="tools-tab active" onclick="switchTab('vault')">Document vault</button>
+    <button class="tools-tab" onclick="switchTab('jd')">JD analyzer</button>
+    <button class="tools-tab" onclick="switchTab('gap')">Gap highlighter</button>
+    <button class="tools-tab" onclick="switchTab('bullets')">Bullet workshop</button>
+  </div>
+
+  <!-- VAULT -->
+  <div class="tools-panel active" id="tab-vault">
+    <p class="tools-desc">Upload your own resumes, cover letters, and writing samples. Everything stays in your browser — nothing is sent anywhere.</p>
+    <div class="vault-upload">
+      <input type="text" id="vault-doc-name" placeholder="Document name (e.g. Resume — PM Track)" />
+      <select id="vault-doc-type">
+        <option value="resume">Resume</option>
+        <option value="cover">Cover letter</option>
+        <option value="writing">Writing sample</option>
+        <option value="other">Other</option>
+      </select>
+      <textarea id="vault-doc-content" placeholder="Paste document text here..." rows="6"></textarea>
+      <button onclick="addVaultDoc()">+ Save document</button>
+    </div>
+    <div id="vault-list"></div>
+  </div>
+
+  <!-- JD ANALYZER -->
+  <div class="tools-panel" id="tab-jd">
+    <p class="tools-desc">Paste a job description and get a structured breakdown of requirements, keywords, and qualifications to guide your application.</p>
+    <div class="jd-controls">
+      <input type="text" id="jd-title" placeholder="Role title (e.g. Research & Policy Analyst — Earthjustice)" />
+      <textarea id="jd-content" placeholder="Paste the full job description here..." rows="8"></textarea>
+      <button onclick="analyzeJD()">Analyze JD</button>
+    </div>
+    <div id="jd-results"></div>
+    <div id="saved-jds-list"></div>
+  </div>
+
+  <!-- GAP HIGHLIGHTER -->
+  <div class="tools-panel" id="tab-gap">
+    <p class="tools-desc">Select a resume and a job description to see where the gaps are and which of your bullets to bring forward.</p>
+    <div class="gap-controls">
+      <div class="gap-selects">
+        <div class="gap-select-group">
+          <label>Select resume</label>
+          <select id="gap-resume-select">
+            <option value="">-- Choose a resume --</option>
+          </select>
+        </div>
+        <div class="gap-select-group">
+          <label>Select job description</label>
+          <select id="gap-jd-select">
+            <option value="">-- Choose a JD --</option>
+          </select>
+        </div>
+      </div>
+      <button onclick="runGapAnalysis()">Highlight gaps</button>
+    </div>
+    <div id="gap-results"></div>
+  </div>
+
+  <!-- BULLET WORKSHOP -->
+  <div class="tools-panel" id="tab-bullets">
+    <p class="tools-desc">Select a bullet from your resume and a target role. Get 2–3 alternative phrasings optimized for that JD. You decide what to keep.</p>
+    <div class="bullet-controls">
+      <div class="gap-select-group">
+        <label>Select job description</label>
+        <select id="bullet-jd-select">
+          <option value="">-- Choose a JD --</option>
+        </select>
+      </div>
+      <textarea id="bullet-input" placeholder="Paste a bullet point from your resume here..." rows="3"></textarea>
+      <textarea id="bullet-context" placeholder="Optional: paste 1-2 sentences of context about this bullet (what project, what outcome)..." rows="3"></textarea>
+      <button onclick="runBulletWorkshop()">Generate alternatives</button>
+    </div>
+    <div id="bullet-results"></div>
+    <p class="tools-note">Note: This feature uses the Claude API. Your bullet and the job description are sent to Anthropic to generate suggestions. No other personal data is included.</p>
+  </div>
+
+</section>
     <!-- TASKS -->
     <section id="tasks" class="dash-section">
       <p class="dash-label">Weekly rhythm</p>
