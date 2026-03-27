@@ -1,4 +1,17 @@
 exports.handler = async function(event) {
+    // Handle preflight CORS request
+    if (event.httpMethod === 'OPTIONS') {
+      return {
+        statusCode: 200,
+        headers: {
+          'Access-Control-Allow-Origin': '*',
+          'Access-Control-Allow-Headers': 'Content-Type',
+          'Access-Control-Allow-Methods': 'POST, OPTIONS',
+        },
+        body: ''
+      };
+    }
+  
     if (event.httpMethod !== 'POST') {
       return { statusCode: 405, body: 'Method not allowed' };
     }
@@ -22,6 +35,8 @@ exports.handler = async function(event) {
         statusCode: 200,
         headers: {
           'Access-Control-Allow-Origin': '*',
+          'Access-Control-Allow-Headers': 'Content-Type',
+          'Access-Control-Allow-Methods': 'POST, OPTIONS',
           'Content-Type': 'application/json',
         },
         body: JSON.stringify(data)
@@ -29,6 +44,9 @@ exports.handler = async function(event) {
     } catch (err) {
       return {
         statusCode: 500,
+        headers: {
+          'Access-Control-Allow-Origin': '*',
+        },
         body: JSON.stringify({ error: err.message })
       };
     }
